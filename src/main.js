@@ -15,7 +15,7 @@ const store = new createStore({
         error: null,
         user: '',
         page: 1,
-        pages: [1,2,3,4]
+        
     },
 
     mutations: {
