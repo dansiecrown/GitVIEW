@@ -109,6 +109,10 @@ footer p {
     justify-content: center;
   }
 
+  nav a {
+    font-size: 1rem;
+  }
+
   .page-container {
     width: 100%;
     margin: 0;
