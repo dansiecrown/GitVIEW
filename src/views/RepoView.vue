@@ -14,7 +14,7 @@
     <div class="pagination">
       <button @click="prevHandle()">Prev</button>
       <div v-for="num in pages">
-        <button @click="skipHandle(num)">{{ num }}</button>
+        <button @click="skipHandle(num)" :class="page === num ? 'currPage' : ''">{{ num }}</button>
       </div>
       <button @click="nextHandle()">Next</button>
     </div>
@@ -50,7 +50,15 @@
             @click="selectRepo(repo)"
             >View Details</router-link
           > -->
-          <div class="btn">View Details</div>
+          <router-link
+            class="btn"
+            :to="{
+              name: 'detail-view',
+              params: { id: `${repo.id}` }
+            }"
+            @click="selectRepo(repo)"
+            >View Details</router-link
+          >
         </div>
       </div>
 
@@ -59,8 +67,56 @@
           <h1>Select a repo to view here</h1>
         </div>
         <div class="shown-details" v-else>
-          <h2>{{ selectedRepo.name }}</h2>
-          <p>{{ selectedRepo.description }}</p>
+          <div class="head-container">
+            <h1>{{ selectedRepo.name }}</h1>
+
+            <div>
+              <p class="rounded">{{ selectedRepo.visibility }}</p>
+            </div>
+
+            <div>
+              <p class="rounded">{{ selectedRepo.default_branch }}</p>
+            </div>
+          </div>
+          <div v-if="selectedRepo.description">
+            <p class="name">Description:</p>
+            <p>{{ selectedRepo.description }}</p>
+          </div>
+
+          <div>
+            <p class="name">Private:</p>
+            <p>{{ selectedRepo.private }}</p>
+          </div>
+
+          <div v-if="selectedRepo.language">
+            <p class="name">Language:</p>
+            <p>{{ selectedRepo.language }}</p>
+          </div>
+
+          <div>
+            <p class="name">Created:</p>
+            <p>{{ selectedRepo.created_at }}</p>
+          </div>
+
+          <div>
+            <p class="name">Last Updated:</p>
+            <p>{{ selectedRepo.updated_at }}</p>
+          </div>
+
+          <div v-if="selectedRepo.license">
+            <p>License:</p>
+            <p>{{ selectedRepo.license.name }}</p>
+          </div>
+
+          <router-link
+            class="btn"
+            :to="{
+              name: 'detail-view',
+              params: { id: `${selectedRepo.id}` }
+            }"
+            @click="selectRepo(selectedRepo)"
+            >View Details</router-link
+          >
         </div>
       </div>
     </div>
@@ -78,6 +134,16 @@
 .head-text {
   display: flex;
   flex-direction: column;
+}
+
+.head-text h1 {
+  font-size: 2em;
+  margin-bottom: 0;
+}
+
+.head-text p {
+  font-size: 1em;
+  margin-top: 0;
 }
 .input-div {
   width: 30%;
@@ -116,6 +182,17 @@
   border: none;
   color: white;
   border-radius: 5px;
+}
+
+.pagination button:hover {
+  background-color: yellowgreen;
+  cursor: pointer;
+}
+
+.currPage {
+  background-color: white !important;
+  color: black !important;
+  border: 1px solid black !important;
 }
 
 a {
@@ -170,6 +247,19 @@ a {
   margin-top: 100px;
   text-align: center;
 }
+.btn {
+  padding: 0.5em 1em;
+  background-color: yellowgreen;
+  color: white;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: rgb(134, 179, 43);
+}
 
 .repo-selected {
   background-color: #3579011b;
@@ -195,6 +285,47 @@ a {
 .repos::-webkit-scrollbar-thumb {
   border-radius: 6px;
   background-color: yellowgreen;
+}
+
+.head-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.head-container > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.head-container p {
+  margin: auto !important;
+  font-size: 14px;
+}
+
+.rounded {
+  border-radius: 20px;
+  padding: 5px 20px;
+  background-color: #4caf50;
+  color: white;
+}
+
+.shown-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shown-details .name {
+  margin-bottom: 0;
+}
+
+.shown-details p {
+  margin-top: 0;
 }
 
 @media screen and (max-width: 768px) {
@@ -238,13 +369,11 @@ export default {
       store.commit('SET_REPO', repo)
       this.selectedRepo = store.state.repo
       this.repoSelected = false
-      console.log(this.selectedRepo)
     },
 
     selectUser() {
       fetch(`https://api.github.com/users/${this.user}/repos?page=${this.page}&per_page=6`)
         .then((response) => {
-          console.log(response)
           return response.json()
         })
         .then((data) => {
@@ -258,7 +387,6 @@ export default {
           this.response = store.state.repos
           this.isLoading = false
         })
-        .then(console.log(store.state))
         .catch((error) => {
           this.error = error
           this.isLoading = false

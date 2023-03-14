@@ -3,30 +3,32 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <main>
-    <div class="app-desc">
-      <div class="git">
-        <img class="gitImg" src="../assets/gitImg.png" alt="Github Logo" width="50" />
-        <h1>GitVIEW</h1>
+  <main class="home-container">
+    <div class="home-wrapper">
+      <div class="app-desc">
+        <div class="git">
+          <img class="gitImg" src="../assets/gitImg.png" alt="Github Logo" width="50" />
+          <h1>GitVIEW</h1>
+        </div>
+        <p>
+          Welcome to our GitHub repository viewer application! With our easy-to-use application, you
+          can easily view a list of all your GitHub repositories, sort them by name, date, or size,
+          and even search for specific repositories by name. You can also view details about each
+          repository, such as its description, language, and last updated time. With our
+          application, managing your GitHub repositories has never been easier.
+        </p>
+
+        <RouterLink to="/repos" class="btn">Start Now</RouterLink>
       </div>
-      <p>
-        Welcome to our GitHub repository viewer application! With our easy-to-use application, you
-        can easily view a list of all your GitHub repositories, sort them by name, date, or size,
-        and even search for specific repositories by name. You can also view details about each
-        repository, such as its description, language, and last updated time. With our application,
-        managing your GitHub repositories has never been easier.
-      </p>
 
-      <RouterLink to="/repos" class="btn">Start Now</RouterLink>
-    </div>
-
-    <div class="profile">
-      <h3 class="profile-title">Default Profile</h3>
-      <div class="card">
-        <img src="../assets/danImg.jpg" alt="Profile" class="profile-img" />
-        <div class="card-title-container">
-          <span class="card-title-name">Username</span>
-          <p class="card-title">Dansiecrown</p>
+      <div class="profile">
+        <h3 class="profile-title">Default Profile</h3>
+        <div class="card">
+          <img src="../assets/danImg.jpg" alt="Profile" class="profile-img" />
+          <div class="card-title-container">
+            <span class="card-title-name">Username</span>
+            <p class="card-title">Dansiecrown</p>
+          </div>
         </div>
       </div>
     </div>
@@ -34,13 +36,19 @@ import { RouterLink } from 'vue-router'
 </template>
 
 <style scoped>
-main {
+.home-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.home-wrapper {
   width: 80%;
   margin: auto;
-  margin-top: 20px;
+
   padding: 1rem;
   display: flex;
-  margin-bottom: 100px;
+
   justify-content: space-between;
   gap: 20px;
 }

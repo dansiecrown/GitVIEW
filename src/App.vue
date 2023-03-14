@@ -35,7 +35,7 @@ nav {
   padding: 1rem;
   width: 80%;
   margin: auto;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 
 nav a {
@@ -59,8 +59,9 @@ nav a:hover {
 
 .page-container {
   width: 80%;
+  height: 75vh;
   margin: auto;
-  margin-top: 40px;
+  margin-top: 10px;
   padding: 1rem;
 }
 
