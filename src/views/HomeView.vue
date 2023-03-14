@@ -164,7 +164,7 @@ a:hover {
   }
 
   .profile {
-    width: 100%;
+    display: none;
   }
 }
 </style>
