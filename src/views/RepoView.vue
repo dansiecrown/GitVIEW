@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="git-repos">
     <div class="repo-head">
       <div class="head-text">
         <h1>View the list of repos</h1>
@@ -175,6 +175,7 @@
 .pagination {
   display: flex;
   gap: 10px;
+  margin-bottom: 20px;
 }
 .pagination button {
   padding: 1em;
@@ -328,7 +329,10 @@ a {
   margin-top: 0;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
+  .git-repos {
+    padding: 40px !important;
+  }
   .repo-head {
     flex-direction: column;
     text-align: center;
@@ -337,6 +341,14 @@ a {
   .input-div {
     width: 70%;
     margin: auto;
+  }
+
+  .repos {
+    width: 100%;
+  }
+
+  .repo-details {
+    display: none;
   }
 }
 </style>
