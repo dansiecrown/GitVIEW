@@ -38,7 +38,6 @@ import { RouterLink } from 'vue-router'
 <style scoped>
 .home-container {
   width: 100%;
-  height: 100%;
   display: flex;
 }
 

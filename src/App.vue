@@ -104,9 +104,9 @@ footer p {
 
 @media screen and (max-width: 768px) {
   nav {
-    width: 100%;
-    margin: 0;
+    margin: auto;
     margin-top: 20px;
+    justify-content: center;
   }
 
   .page-container {
