@@ -42,7 +42,7 @@ const router = createRouter({
       component: () => import('../views/DetailView.vue'),    
     },
     {
-      path: '/:catchAll(.*)',
+      path: '/:catchAll(.*)*',
       name: 'Error404',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route

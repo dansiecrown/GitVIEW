@@ -20,7 +20,8 @@
     </div>
     <div class="repo-container">
       <div v-if="isLoading">
-        <h1>Loading...</h1>
+        <h2>Loading</h2>
+        <StillLoading />
       </div>
       <div v-else class="repos">
         <div
@@ -356,6 +357,8 @@ a {
 <script>
 import { RouterView } from 'vue-router'
 import store from '../store/store'
+import StillLoading from '../components/StillLoading.vue'
+
 export default {
   data() {
     return {
@@ -365,7 +368,7 @@ export default {
       repoSelected: true,
       error: null,
       user: 'dansiecrown',
-      page: 100
+      page: 1
     }
   },
   computed: {
@@ -384,6 +387,7 @@ export default {
     },
 
     selectUser() {
+      this.isLoading = true
       fetch(`https://api.github.com/users/${this.user}/repos?page=${this.page}&per_page=6`)
         .then((response) => {
           return response.json()
